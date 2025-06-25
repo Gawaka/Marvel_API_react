@@ -1,0 +1,35 @@
+
+
+@mixin title($font-size: 2.5rem, $font-weight: 900) {
+    clip-path: polygon(7% 0%, 100% 0%, 93% 100%, 0% 100%);
+    width: max-content;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: "Lato", sans-serif;
+    font-weight: $font-weight;
+    font-style: normal;
+    font-size: $font-size;
+    text-align: center;
+    margin: 0 0 24px 0;
+    background: linear-gradient(90deg, #555555, #727272);
+    background-clip: text;
+    color: transparent;
+    text-shadow:
+        -1px -1px 0 rgb(255, 42, 42),
+        4px -1px 0 rgb(0, 0, 0),
+        -1px 1px 0 rgb(0, 0, 0),
+        1px 2px 1px rgb(255, 255, 255);
+        background: black;
+        padding: 0 50px;
+}
+
+@mixin thumbnail($border: none) {
+    background-color: black;
+    width: 100%;
+    width: 211px;
+    height: 211px;
+    object-fit: contain;
+    border-radius: 5px;
+    object-fit: cover;
+    border: $border;
+}

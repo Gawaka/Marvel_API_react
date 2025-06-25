@@ -1,0 +1,71 @@
+/* ======= Global Reset & Base Styles ======= */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    }
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: wheat;
+    color: #000;
+    font-family: "Lato", sans-serif;
+    margin-bottom: 50px;
+}
+
+/* Remove default list styles */
+ul,
+ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Remove default anchor styles */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Set images and media to be responsive */
+
+/* Reset form elements */
+button,
+input,
+select,
+textarea {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: none;
+    outline: none;
+    }
+
+/* Set default button behavior */
+button {
+    cursor: pointer;
+}
+
+/* Make sure headings have no default margin */
+h1, h2, h3, h4, h5, h6,
+p {
+    margin: 0;
+    font-weight: normal;
+}
+
+
+/* Ensure text elements wrap properly */
+p,
+h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+

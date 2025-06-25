@@ -1,0 +1,14 @@
+@import '../../assets/mixins.scss';
+
+.App {
+    box-sizing: border-box;
+
+    &__characters-wrapper {
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+.title {
+    @include title(2.5rem)
+}

@@ -1,0 +1,55 @@
+@use '../../assets/fonts.scss';
+
+.button {
+    margin-top: 15px;
+    position: relative;
+    width: 211px;
+    height: 50px;
+    border: none;
+    background-color: rgb(231, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-y: hidden;
+    // border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 3px 3px 0px rgb(145, 145, 145);
+    transition-duration: .3s;
+}
+
+.layer {
+    width: 60px;
+    position: absolute;
+    left: -30px;
+    transition-duration: .3s;
+    fill: #ffaf02;
+}
+
+button:hover {
+    transform: translateY(5px);
+    box-shadow: 3px 3px 0px rgb(0, 0, 0);
+    transition-duration: .3s;
+}
+
+button:hover .layer {
+    left: 0%;
+    width: 100%;
+    transition-duration: .3s;
+}
+
+button p {
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    position: absolute;
+    z-index: 2;
+    transition-duration: .1s;
+    font-family: "Lato", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+}
+
+button:hover p {
+    color: transparent;
+    transition-duration: .3s;
+}

@@ -1,0 +1,155 @@
+import { useState, useEffect, use } from 'react';
+import { getAllCharacters, getCharacterByName } from '../../service/MarvelService';
+import LoadMessage from '../LoadMessage/LoadMessage';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import Button from '../Button/Button';
+import './characters.scss';
+import bg from '../../assets/image/bg.jpg';
+
+export default function Characters() {
+    const [characters, setCharacters] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [isSearching, setIsSearching] = useState(false);
+    const [noResults, setNoResults] = useState(false);
+    const [page, setPage] = useState(1);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
+    
+    useEffect(()=> {
+        console.log('useEffect complete');
+            if (isSearching) return;
+
+            getAllCharacters()
+                .then(char=> {
+                    // console.log('Get characters:', char);
+                    setCharacters(char);
+                })
+                .catch(error=> {
+                    setError(true);
+                    console.log('Error');
+                })
+                .finally(()=> {
+                    setLoading(false);
+                })
+    }, [page, isSearching]);
+
+    useEffect(() => {
+    if (searchTerm.trim() === '') {
+        setIsSearching(false);
+        setNoResults(false);
+        setPage(1);
+    }
+}, [searchTerm]);
+
+
+    function renderCards(arr) {
+        const cards = arr.map(item=> (
+            <li className="characters__card" key={item.id}>
+                <h3 className="characters__name">{item.name}</h3>
+                <img
+                    className={`characters__thumbnail ${item.thumbnail.includes('image_not_available') ? 'characters__thumbnail--contain' : ''}`}
+                    src={item.thumbnail}
+                    alt={item.name}
+                />
+                <div className="characters__buttons-wrapper">
+                    <Button className={'characters__btn'} text='Comics' />
+                    <a href={item.wiki}><Button className={'characters__btn'} text='Wiki' /></a>
+                </div>
+            </li>
+        ))
+
+        return cards
+    };
+
+    function loadMoreCharacters() {
+        const nextPage = page + 1;
+        getAllCharacters(nextPage)
+            .then(newChars => {
+                setCharacters(prev => [...prev, ...newChars]);
+                setPage(nextPage);
+        });
+    };
+
+    function searchCharacter(e) {
+        e.preventDefault();
+
+        if (!searchTerm.trim()) {
+            setIsSearching(false);
+            return;
+        }
+
+        setLoading(true);
+        setIsSearching(true);
+        setError(false);
+        setNoResults(false);
+
+        getCharacterByName(searchTerm)
+            .then(char => {
+                if (char.length === 0) {
+                    setNoResults(true);
+                    setCharacters([]);
+                } else {
+                    setCharacters(char);
+                    setNoResults(false);
+                }
+            })
+            .catch(() => {
+                setError(true);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    }
+
+    const charCard = renderCards(characters);
+    const loadMessage = loading ? <LoadMessage/> : null;
+    const errorMessage = error ? <ErrorMessage text="Error"/> : null;
+    const noResultsMessage = noResults ? <ErrorMessage text="Char is not found"/> : null;
+    const loadButton =
+    !loading &&
+    !error &&
+    !isSearching &&
+    characters.length > 0 ? (
+        <Button
+            className="characters__load-more"
+            text="Load More"
+            onClick={loadMoreCharacters}
+        />
+    ) : null;
+
+    return (
+        <>
+            <section
+                className="wrapper-characters-list"
+                style={{ backgroundImage: `url(${bg})` }}
+            >
+                <div className="wrapper-characters-list__action">
+                    <h2 className='title'>Characters</h2>
+                    <form 
+                        className='wrapper-characters-list__form' 
+                        action=""
+                        onSubmit={searchCharacter}
+                    >
+                        <input 
+                            className='wrapper-characters-list__search-input' 
+                            type="text" 
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            />
+                        <button 
+                            className='wrapper-characters-list__button'
+                            type='submit'
+                        >Search</button>
+                    </form>
+                </div>
+                {loadMessage}
+                {errorMessage}
+                {noResultsMessage}
+                <ul className="characters">
+                    {charCard}
+                </ul>
+                {loadButton}
+            </section>
+        </>
+    )
+}
