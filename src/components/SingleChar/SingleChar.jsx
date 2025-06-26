@@ -31,20 +31,7 @@ export default function SingleChar() {
 
     useEffect(()=> {
         console.log('useEffect single char complete');
-
         updateChar();
-
-        // getCharacter()
-        //     .then(char=> {
-        //         console.log('Get single character:', char);
-        //         setCharacter(char);
-        //     })
-        //     .catch(error=> {
-        //         console.log('Error');
-        //     })
-        //     .finally(()=> {
-        //         setLoading(false);
-        //     })
     }, []);
 
     function renderCharacter() {

@@ -19,10 +19,12 @@ export default function Characters() {
         console.log('useEffect complete');
             if (isSearching) return;
 
-            getAllCharacters()
+            getAllCharacters(page)
                 .then(char=> {
                     // console.log('Get characters:', char);
-                    setCharacters(char);
+                    setCharacters(prev=>
+                        page === 1 ? char : [...prev, ...char]
+                    );
                 })
                 .catch(error=> {
                     setError(true);
@@ -34,7 +36,7 @@ export default function Characters() {
     }, [page, isSearching]);
 
     useEffect(() => {
-    if (searchTerm.trim() === '') {
+    if (searchTerm.trim() === '' && page === 1) {
         setIsSearching(false);
         setNoResults(false);
         setPage(1);
@@ -56,24 +58,18 @@ export default function Characters() {
                     <a href={item.wiki}><Button className={'characters__btn'} text='Wiki' /></a>
                 </div>
             </li>
-        ))
-
+        ));
         return cards
     };
 
     function loadMoreCharacters() {
-        const nextPage = page + 1;
-        getAllCharacters(nextPage)
-            .then(newChars => {
-                setCharacters(prev => [...prev, ...newChars]);
-                setPage(nextPage);
-        });
+        setPage(prev => prev + 1);
     };
 
     function searchCharacter(e) {
         e.preventDefault();
 
-        if (!searchTerm.trim()) {
+        if (!searchTerm.trim() === '') {
             setIsSearching(false);
             return;
         }
@@ -151,5 +147,5 @@ export default function Characters() {
                 {loadButton}
             </section>
         </>
-    )
-}
+    );
+};

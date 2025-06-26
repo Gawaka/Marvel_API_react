@@ -15,7 +15,7 @@ export default function Comics() {
                         <li className='comics__card'>
                             <h3 className='comics__name'>name</h3>
                             <p className="comics__date"></p>
-                            <img className='comics__thumbnail' src="" alt="" />
+                            <img className='comics__thumbnail' src="#" alt="#" />
                             <p className="comics__description">description</p>
                             <p className="comics__price"></p>
                         </li>

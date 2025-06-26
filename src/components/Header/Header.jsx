@@ -7,13 +7,13 @@ const Header = () => {
     <header className="header">
         <div className="header__wrapper">
             <div className="header__brand">
-                <h1 className="header__title">MARVEL UNIVERSE</h1>
+                <h1 className="header__title"><Link to='/'>MARVEL UNIVERSE</Link></h1>
             </div>
-
             <nav className="header__nav">
-                <ul>
-                    <li href="#" className="header__link">Characters</li>
-                    <li href="#" className="header__link">Comics</li>
+                <ul className='header__nav-link-container'>
+                    <li className="header__link"><Link to='/'>Characters </Link></li>
+                    <span className='header__link'>|</span>
+                    <li className="header__link"><Link to='/comics'>Comics</Link></li>
                 </ul>
             </nav>
         </div>
