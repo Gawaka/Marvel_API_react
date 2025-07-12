@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Header from "../Header/Header";
 import Characters from "../Characters/Characters";
+import CharInfo from '../CharInfo/CharInfo';
 import SingleChar from "../SingleChar/SingleChar";
 import Comics from '../Comics/Comics';
 import Footer from "../Footer/Footer";
@@ -22,11 +23,11 @@ function AppContent() {
             <Header />
             <div className="App__content-wrapper">
                 <Routes>
-                    <Route path="/" element={<Characters />} />
-                    <Route path="/comics" element={<Comics />} />
+                    <Route path="/" element={<Characters/>}/>
+                    <Route path='/charInfo' element={<CharInfo/>}/>
+                    <Route path="/comics" element={<Comics/>}/>
                 </Routes>
-
-                {location.pathname === '/' && <SingleChar />}
+                {location.pathname === '/' && <SingleChar/>}
             </div>
             <Footer />
         </div>

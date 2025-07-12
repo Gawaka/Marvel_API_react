@@ -1,0 +1,97 @@
+@import '../../assets/mixins.scss';
+@import '../../assets/variables.scss';
+
+.character-info {
+    background-image: url('../../assets/image/bg.jpg');
+    box-shadow: 10px 10px 10px 10px rgba(9, 8, 8, 0.6);
+    padding: 30px;
+    background-color: aquamarine;
+    margin: 50px 0 50px 0;
+    width: max-content;
+    min-height: 750px;
+
+    &__wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    span {
+        box-shadow: 20px 18px 5px 0px rgba(255, 255, 255, 0.75);
+        clip-path: polygon(12% 0%, 100% 0%, 88% 100%, 0% 100%);
+        width: 100px;
+        height: 25px;
+        background-color: red;
+        color: white;
+        border: 1px solid black;
+        font-family: "Lato", sans-serif;
+        font-weight: 600;
+        font-style: normal;
+        font-size: 16px;
+        text-align: center;
+        text-transform: uppercase;
+        padding: 0;
+        letter-spacing: 1px;
+        padding: 0 10px;
+    }
+
+    &__name {
+        @include title
+    }
+
+    &__thumbnail {
+        object-fit: cover;
+        border: 2px solid black;
+        width: 211px;
+        height: 211px;
+    }
+
+    &__description {
+        background-color: wheat;
+        padding: 5px;
+        margin: 20px 0;
+        text-align: center;
+        border: 2px solid black;
+        font-family: "Lato", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        max-width: 470px;
+    }
+
+    &__comics {
+        background-color: wheat;
+        padding: 5px;
+        border: 2px solid black;
+    }
+}
+
+@media (max-width: map-get($breakpoints, xl)) {
+    .character-info {
+    margin: 50px 0 50px 0;
+    width: max-content;
+
+    &__thumbnail {
+        width: 200px;
+        height: 200px;
+    }
+
+    &__description {
+        max-width: 400px;
+    }
+}
+}
+
+@media (max-width: map-get($breakpoints, sm)) {
+    .character-info {
+        margin: 40px 0 40px 0;
+
+        &__thumbnail {
+            width: 160px;
+            height: 160px;
+        }
+
+        &__description {
+            max-width: 300px;
+        }
+    }
+}

@@ -1,8 +1,8 @@
 
 
-@mixin title($font-size: 2.5rem, $font-weight: 900) {
+@mixin title($font-size: 2.5rem, $font-weight: 900, $width: max-content) {
     clip-path: polygon(7% 0%, 100% 0%, 93% 100%, 0% 100%);
-    width: max-content;
+    width: $width;
     text-transform: uppercase;
     letter-spacing: 2px;
     font-family: "Lato", sans-serif;
@@ -23,13 +23,63 @@
         padding: 0 50px;
 }
 
-@mixin thumbnail($border: none) {
-    background-color: black;
+@mixin thumbnail($border: none, $object-fit: cover, $bg: black) {
+    background-color: $bg;
     width: 100%;
     width: 211px;
     height: 211px;
     object-fit: contain;
     border-radius: 5px;
-    object-fit: cover;
+    object-fit: $object-fit;
     border: $border;
+}
+
+@mixin form() {
+    clip-path: polygon(7% 0%, 100% 0%, 93% 100%, 0% 100%);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: black;
+    width: 350px;
+    height: 50px;
+    padding: 10px;
+}
+
+@mixin input() {
+    border: 1px solid rgb(0, 0, 0);
+    clip-path: polygon(6% 0%, 100% 0%, 94% 100%, 0% 100%);
+    padding: 0 20px 0 20px;
+    width: 200px;
+    height: 25px;
+    background-color: wheat;
+}
+
+@mixin action-button() {
+    box-shadow: 20px 18px 5px 0px rgba(255,255,255,0.75);
+    clip-path: polygon(12% 0%, 100% 0%, 88% 100%, 0% 100%);
+    width: 100px;
+    height: 25px;
+    background-color: red;
+    color: white;
+    border: 1px solid black;
+    font-family: "Lato", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 16px;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 0;
+    letter-spacing: 1px;
+}
+
+@mixin loading() {
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
 }

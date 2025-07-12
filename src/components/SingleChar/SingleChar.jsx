@@ -26,6 +26,7 @@ export default function SingleChar() {
         })
         .finally(()=> {
             setLoading(false);
+            setError(false);
         })
     };
 
@@ -41,12 +42,14 @@ export default function SingleChar() {
         return (
             <li className="character__card" key={id}>
                 <h3 className="character__name">{name}</h3>
-                <img
-                    className={`character__thumbnail ${thumbnail.includes('image_not_available') ? 'characters__thumbnail--contain' : ''}`}
-                    src={thumbnail}
-                    alt={name}
-                />
-                <p className="character__description">{description}</p>
+                <div className="character__about-wrapper">
+                    <img
+                        className={`character__thumbnail ${thumbnail.includes('image_not_available') ? 'characters__thumbnail--contain' : ''}`}
+                        src={thumbnail}
+                        alt={name}
+                    />
+                    <p className="character__description">{description}</p>
+                </div>
             </li>
         )
     };

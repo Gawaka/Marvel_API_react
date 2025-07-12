@@ -1,17 +1,20 @@
 @use '../../assets/fonts.scss';
+@import '../../assets/mixins.scss';
+@import '../../assets/variables.scss';
 
 .wrapper-characters-list {
     border: 2px solid black;
     padding: 30px;
-    margin: 50px 0 0 95px;
+    margin: 50px 0 0 0;
     width: max-content;
     background-image: url('../../assets/image/bg.jpg');
     background-size: auto;
     box-shadow: 10px 10px 10px 10px rgba(9, 8, 8, 0.6);
     max-width: 1245px;
-    min-width: 1245px;
-    min-height: 1630px;
+    min-height: 630px;
+    height: max-content;
     position: relative;
+    align-items: center;
 
     &__action {
         display: flex;
@@ -19,14 +22,7 @@
     }
 
     &__form {
-        clip-path: polygon(7% 0%, 100% 0%, 93% 100%, 0% 100%);
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        background-color: black;
-        width: 350px;
-        height: 50px;
-        padding: 10px;
+        @include form
     }
 
     &__search-input {
@@ -39,21 +35,11 @@
     }
 
     &__button {
-        box-shadow: 20px 18px 5px 0px rgba(255,255,255,0.75);
-        clip-path: polygon(12% 0%, 100% 0%, 88% 100%, 0% 100%);
-        width: 100px;
-        height: 25px;
-        background-color: red;
-        color: white;
-        border: 1px solid black;
-        font-family: "Lato", sans-serif;
-        font-weight: 600;
-        font-style: normal;
-        font-size: 16px;
-        text-align: center;
-        text-transform: uppercase;
-        padding: 0;
-        letter-spacing: 1px;
+        @include action-button
+    }
+
+    &__loading {
+        @include loading
     }
 }
 
@@ -63,9 +49,6 @@
     grid-template-columns: repeat(4, max-content);
     gap: 20px;
     padding: 0;
-    list-style: none;
-    font-family: "Lato", sans-serif;
-    font-weight: 400;
     font-style: normal;
     width: max-content;
     margin: 0;
@@ -73,6 +56,7 @@
 
     &__card {
         background-color: rgba(0, 0, 0, 0.88);
+        clip-path: polygon(0% 0%, 100% 0%, 100% 94%, 88% 100%, 0% 100%);
         border-radius: 5px;
         overflow: hidden;
         padding: 30px;
@@ -83,7 +67,6 @@
         text-align: center;
         height: auto;
         max-width: 400px;
-        // clip-path: polygon(0% 0%, 100% 0%, 100% 94%, 88% 100%, 0% 100%);
 
         &:hover {
             box-shadow: 10px 9px 23px rgba(255, 0, 0, 0.45);
@@ -102,17 +85,7 @@
     }
 
     &__thumbnail {
-        width: 100%;
-        width: 211px;
-        height: 211px;
-        object-fit: contain;
-        border-radius: 5px;
-        object-fit: cover;
-
-            &--contain {
-                object-fit: contain;
-                background-color: #1e1e1e;
-            }
+        @include thumbnail(none, cover, none)
     }
 
     &__buttons-wrapper {
@@ -132,36 +105,120 @@
     }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: map-get($breakpoints, xl)) {
     .characters {
-        grid-template-columns: repeat(auto-fit, minmax(200px, max-content));
-        gap: 16px;
+        gap: 18px;
+        margin: 0 auto;
+
+        &__card {
+            padding: 20px;
+            margin: 0 auto;
+        }
+
+        &__thumbnail {
+            width: 185px;
+            height: 185px;
+        }
+
+        &__buttons-wrapper {
+            display: flex;
+            gap: 6px;
+            justify-content: space-between;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        &__btn {
+            width: 180px;
+            height: 35px;
+        }
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: map-get($breakpoints, lg)) {
     .wrapper-characters-list {
         margin-left: 30px;
+        width: max-content;
+        min-width: 400px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
     }
 
     .characters {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        width: 100%;
-        justify-content: center;
-    }
+        grid-template-columns:  repeat(3, 1fr);
+        gap: 8px;
 
-    .characters__name {
-        font-size: 1rem;
-    }
+        &__thumbnail {
+            width: 180px;
+            height: 180px;
+        }
 
-    .characters__btn {
-        width: 100%;
-    }
+        &__buttons-wrapper {
+            flex-direction: row;
+        }
 
-    .characters__buttons-wrapper {
-        flex-direction: column;
-        align-items: stretch;
+        &__btn {
+            width: 100px;
+            height: 26px;
+        }
     }
 }
 
+@media (max-width: map-get($breakpoints, md)) {
+    .wrapper-characters-list {
+        margin-left: 30px;
+        width: max-content;
+        margin: 0;
 
+        &__action {
+            flex-direction: column;
+            margin-bottom: 30px;
+        }
+    }
+
+    .characters {
+        grid-template-columns:  repeat(2, 1fr);
+
+        &__thumbnail {
+            width: 178px;
+            height: 178px;
+        }
+
+        &__buttons-wrapper {
+            gap: 6px;
+            flex-direction: row;
+        }
+
+        &__name {
+            font-size: 1rem;
+        }
+
+        &__btn {
+            width: 100px;
+        }
+    }
+}
+
+@media (max-width: map-get($breakpoints, sm)) {
+    .wrapper-characters-list {
+        margin-left: 20px;
+        flex-direction: column;
+        margin: 0;
+
+        &__action {
+            flex-direction: column;
+            margin-bottom: 30px;
+        }
+    }
+
+    .characters {
+        grid-template-columns:  repeat(1, 1fr);
+        gap: 7px;
+
+        &__buttons-wrapper {
+            gap: 6px;
+            flex-direction: row;
+        }
+    }
+}

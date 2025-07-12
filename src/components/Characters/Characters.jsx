@@ -1,4 +1,5 @@
-import { useState, useEffect, use } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getAllCharacters, getCharacterByName } from '../../service/MarvelService';
 import LoadMessage from '../LoadMessage/LoadMessage';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
@@ -14,6 +15,8 @@ export default function Characters() {
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
+    const navigate = useNavigate();
+
     
     useEffect(()=> {
         console.log('useEffect complete');
@@ -54,7 +57,11 @@ export default function Characters() {
                     alt={item.name}
                 />
                 <div className="characters__buttons-wrapper">
-                    <Button className={'characters__btn'} text='Comics' />
+                <Button 
+                    className={'characters__btn'} 
+                    text='Details' 
+                    onClick={() => navigate('/charInfo', { state: { charId: item.id } })}
+                />
                     <a href={item.wiki}><Button className={'characters__btn'} text='Wiki' /></a>
                 </div>
             </li>
@@ -69,7 +76,7 @@ export default function Characters() {
     function searchCharacter(e) {
         e.preventDefault();
 
-        if (!searchTerm.trim() === '') {
+        if (searchTerm.trim() === '') {
             setIsSearching(false);
             return;
         }
@@ -95,23 +102,23 @@ export default function Characters() {
             .finally(() => {
                 setLoading(false);
             });
-    }
+    };
 
-    const charCard = renderCards(characters);
-    const loadMessage = loading ? <LoadMessage/> : null;
+    const charCard = !loading && !error ? renderCards(characters) : null;
+    const loadMessage = loading ? <LoadMessage className="wrapper-characters-list__loading"/> : null;
     const errorMessage = error ? <ErrorMessage text="Error"/> : null;
     const noResultsMessage = noResults ? <ErrorMessage text="Char is not found"/> : null;
     const loadButton =
-    !loading &&
-    !error &&
-    !isSearching &&
-    characters.length > 0 ? (
-        <Button
-            className="characters__load-more"
-            text="Load More"
-            onClick={loadMoreCharacters}
-        />
-    ) : null;
+        !loading &&
+        !error &&
+        !isSearching &&
+        characters.length > 0 && page < 5 - 1 ? (
+            <Button
+                className="characters__load-more"
+                text="Load More"
+                onClick={loadMoreCharacters}
+            />
+        ) : null;
 
     return (
         <>

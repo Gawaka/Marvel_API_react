@@ -6,7 +6,7 @@ export default function Footer() {
         <>
             <footer className='footer'>
                 <section className='footer__wrapper'>
-                    
+                    <h2 className='footer__title'>Marvel</h2>
                 </section>
             </footer>
         </>
