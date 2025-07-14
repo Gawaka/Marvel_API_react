@@ -39,11 +39,7 @@
         text-transform: uppercase;
         letter-spacing: 3px;
         text-align: center;
-        text-shadow:
-            -1px -1px 0 red,
-            1px -1px 0 red,
-            -1px 1px 0 red,
-            1px 1px 0 red;
+        text-shadow: $text-shadow;
     }
 
     &__nav {

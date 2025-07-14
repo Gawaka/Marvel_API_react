@@ -1,3 +1,4 @@
+@import '../../assets/variables.scss';
 
 .footer {
     background-image: url('../../assets/image/bannerr.png');
@@ -9,4 +10,30 @@
     height: 225px;
     margin: 0 auto;
     margin-top: 50px;
+
+    &__wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 1% 10% 3% 10%;
+    }
+
+    &__title {
+        font-family: "Lato", sans-serif;
+        font-weight: 900;
+        font-style: normal;
+        color: white;
+        font-size: 50px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        text-align: center;
+        text-shadow: $text-shadow;
+    }
+
+    p {
+        font-size: 40px;
+        text-shadow: $text-shadow;
+    }
 }

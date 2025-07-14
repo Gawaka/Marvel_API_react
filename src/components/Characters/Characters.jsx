@@ -5,7 +5,6 @@ import LoadMessage from '../LoadMessage/LoadMessage';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Button from '../Button/Button';
 import './characters.scss';
-import bg from '../../assets/image/bg.jpg';
 
 export default function Characters() {
     const [characters, setCharacters] = useState([]);
@@ -24,7 +23,6 @@ export default function Characters() {
 
             getAllCharacters(page)
                 .then(char=> {
-                    // console.log('Get characters:', char);
                     setCharacters(prev=>
                         page === 1 ? char : [...prev, ...char]
                     );
@@ -45,7 +43,6 @@ export default function Characters() {
         setPage(1);
     }
 }, [searchTerm]);
-
 
     function renderCards(arr) {
         const cards = arr.map(item=> (
@@ -123,9 +120,7 @@ export default function Characters() {
     return (
         <>
             <section
-                className="wrapper-characters-list"
-                style={{ backgroundImage: `url(${bg})` }}
-            >
+                className="wrapper-characters-list">
                 <div className="wrapper-characters-list__action">
                     <h2 className='title'>Characters</h2>
                     <form 
